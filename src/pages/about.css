@@ -1,0 +1,29 @@
+.about {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .about h1 {
+    color: turquoise;
+  }
+  
+  .section {
+    margin: 20px 0;
+  }
+  
+  .section h2 {
+    color: turquoise;
+    margin-bottom: 10px;
+  }
+  
+  .section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+  }
+  
+  .section p {
+    color: #333;
+  }

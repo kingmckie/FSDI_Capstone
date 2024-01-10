@@ -1,0 +1,25 @@
+.blogfeed {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .blogfeed h1 {
+    color: turquoise;
+    margin-bottom: 20px;
+  }
+  
+  .blog-item {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .blog-item h2 {
+    color: turquoise;
+  }
+  
+  .blog-item p {
+    margin: 10px 0;
+  }

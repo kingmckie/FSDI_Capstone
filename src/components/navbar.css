@@ -1,0 +1,14 @@
+.navbar {
+    background-color: rgb(78, 143, 160);
+  }
+  
+  .navbar .user-info {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    margin-right: 10px;
+    border: 1px solid #fcfcfc;
+    border-radius: 4px;
+    padding: 2px 5px 0 5px;
+  }
+  
