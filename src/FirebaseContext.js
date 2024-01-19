@@ -1,23 +1,22 @@
+// FirebaseContext.js
+import React, { createContext, useContext } from 'react';
+import db, { auth } from './firebase'; // Adjust the path based on your project structure
 
-import { createContext, useContext } from 'react';
-import app from './firebase';
+const FirebaseContext = createContext();
 
-const FirebaseContext = createContext(null);
+export function useFirebase() {
+  return useContext(FirebaseContext);
+}
 
+export function FirebaseProvider({ children }) {
+  const value = {
+    auth,
+    db,
+  };
 
-export const useFirebase = () => {
-  const context = useContext(FirebaseContext);
-  if (!context) {
-    throw new Error('useFirebase must be used within a FirebaseProvider');
-  }
-  return context;
-};
-
-
-export const FirebaseProvider = ({ children }) => {
   return (
-    <FirebaseContext.Provider value={app}>
+    <FirebaseContext.Provider value={value}>
       {children}
     </FirebaseContext.Provider>
   );
-};
+}

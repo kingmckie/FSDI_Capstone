@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './blogfeed.css';
 
 import { getDocs, collection } from 'firebase/firestore';
-import db from '../firebase';
+import  db from '../firebase';
 
 function BlogFeed() {
   const [blogs, setBlogs] = useState([]);
