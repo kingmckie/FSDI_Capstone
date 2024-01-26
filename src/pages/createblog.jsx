@@ -1,8 +1,9 @@
 import './createblog.css';
-import { useState } from 'react';
-
-import  db from '../firebase';
-import { addDoc, collection } from 'firebase/firestore';
+import { useState, useContext, useEffect } from 'react';
+import BlogFeed from '../components/blogfeed';
+import DataContext from '../state/dataContext';
+import { addDoc, collection, getDocs, where } from 'firebase/firestore';
+import db from '../firebase';
 
 function CreateBlog() {
   const [blog, setBlog] = useState({
@@ -11,6 +12,34 @@ function CreateBlog() {
     content: '',
     url: '', // New field for URL
   });
+
+  const { user, userBlogs, updateUserBlogs } = useContext(DataContext);
+
+  useEffect(() => {
+    // Fetch blogs for the logged-in user when the component mounts
+    if (user.isLoggedIn) {
+      loadBlogsForUser();
+    }
+  }, [user.isLoggedIn]); // Trigger the effect when the login state changes
+
+  async function loadBlogsForUser() {
+    try {
+      const userBlogsQuery = await getDocs(collection(db, 'blogs'), where('authorEmail', '==', user.email));
+
+      const blogs = [];
+      userBlogsQuery.forEach((item) => {
+        const blog = {
+          id: item.id,
+          ...item.data(),
+        };
+        blogs.push(blog);
+      });
+
+      updateUserBlogs(blogs); // Update user blogs in the context
+    } catch (error) {
+      console.error('Error loading blogs:', error);
+    }
+  }
 
   function handleInputChange(e) {
     const name = e.target.name;
@@ -29,10 +58,13 @@ function CreateBlog() {
       return;
     }
 
-    console.log(blog);
+    // Save to firebase with additional data like authorEmail
+    const newBlog = {
+      ...blog,
+      authorEmail: user.email,
+    };
 
-    // Save to firebase
-    addDoc(collection(db, 'blogs'), blog)
+    addDoc(collection(db, 'blogs'), newBlog)
       .then(() => {
         console.log('Blog post saved successfully.');
         // Clear form after successful save
@@ -42,6 +74,9 @@ function CreateBlog() {
           content: '',
           url: '', // Clear URL field as well
         });
+
+        // Refresh user's blogs
+        loadBlogsForUser();
       })
       .catch((error) => {
         console.error('Error saving blog post:', error);
@@ -53,7 +88,7 @@ function CreateBlog() {
       <h1>Create a New Blog Post of Your Experience</h1>
 
       <div className="form">
-        <div>
+      <div>
           <label className="form-label">Title</label>
           <input
             name="title"
@@ -99,6 +134,9 @@ function CreateBlog() {
           </button>
         </div>
       </div>
+
+      {/* Display the created blogs using BlogFeed component */}
+      <BlogFeed blogs={userBlogs} />
     </div>
   );
 }

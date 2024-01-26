@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./App.css";
-
+import GeoSpatial from './components/GeoSpatial';
 import Home from "./pages/home";
 import Group from "./pages/group";
 import About from "./pages/about";
@@ -17,6 +17,8 @@ import { FirebaseProvider } from "./FirebaseContext";
 import ChatDetail from "./components/ChatDetail";
 import Login from "./components/login";
 import GlobalProvider from "./state/globalProvider";
+
+
 
 function App() {
   const [currentVideo, setCurrentVideo] = useState({
@@ -46,6 +48,8 @@ function App() {
               <Route path="/admin" element={<Admin />} />
               <Route path="/chat/:categoryId" element={<ChatDetail />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/blogfeed" element={<BlogFeed />} />
+              <Route path="/geospatial" element={<GeoSpatial />} />
             </Routes>
             <Footer />
           </div>

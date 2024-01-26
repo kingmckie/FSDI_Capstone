@@ -1,9 +1,9 @@
-
 import React, { useContext, useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { auth } from '../firebase';
 import DataContext from '../state/dataContext';
 import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -30,6 +30,18 @@ const Login = () => {
             });
     };
 
+    const handleLogout = () => {
+      signOut(auth)
+        .then(() => {
+          setLoggedUser(null); // pass null to clear the logged user
+          // send the user to the login page or any other desired page
+          navigate("/login");
+        })
+        .catch((error) => {
+          console.log("Error during logout", error.code, error.message);
+        });
+    };
+
     return (
         <div className='container'>
             <h1>Login</h1>
@@ -42,6 +54,7 @@ const Login = () => {
                 <input type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
             <button onClick={handleLogin}>Login</button>
+            <button onClick={handleLogout}>Logout</button>
         </div>
     );
 };

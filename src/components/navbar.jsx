@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import DataContext from '../state/dataContext';
 
+
 function Navbar() {
 
   const user = useContext(DataContext).user;
@@ -49,6 +50,11 @@ function Navbar() {
             <li className="nav-item">
               <Link className="nav-link" to="/createblog">
                 Create Blog
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/geospatial">
+                GeoSpatial
               </Link>
             </li>
             <li className="nav-item">

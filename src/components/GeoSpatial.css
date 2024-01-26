@@ -1,14 +1,17 @@
-/* geospatial.css */
+.geospatial-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Adjust as needed */
+}
 
 .geospatial {
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .map-container {
-    height: 400px;
-    margin-top: 20px;
-  }
-  
-  /* You can customize the styling further based on your design preferences */
-  
+  text-align: center;
+  padding: 20px;
+}
+
+.map-container {
+  width: 100%; /* Full width */
+  height: 600px; /* Adjust as needed */
+  margin-top: 20px;
+}

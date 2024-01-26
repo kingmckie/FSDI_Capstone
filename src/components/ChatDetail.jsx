@@ -1,17 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import { collection, getDocs, addDoc } from "firebase/firestore";
 import DataContext from "../state/dataContext";
-
-import db from  "../firebase";
-import { addDoc, collection } from 'firebase/firestore';
+import db from "../firebase";
 
 const ChatDetail = ({ category }) => {
-  const {categoryId} = useParams();
+  const { categoryId } = useParams();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const username = queryParams.get("username");
 
-  const { loggedUser: user } = useContext(DataContext); // Access loggedUser from DataContext
+  const { user } = useContext(DataContext);
 
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
@@ -21,40 +19,66 @@ const ChatDetail = ({ category }) => {
       const message = {
         text: newMessage,
         group: categoryId,
-        sender: user?.displayName || username,
+        sender: user?.displayName || user?.email || "Anonymous",
+        cratedAt: new Date()
       };
 
-      setMessages([...messages, message]);
-      setNewMessage("");
 
-      // save the newMessage to firebase
-    
+      // Save the newMessage to firebase
       addDoc(collection(db, `chats/groups/${categoryId}`), message)
         .then(() => {
           console.log("Chat post saved successfully.");
+          setMessages([...messages, message]);
+          setNewMessage("");
         })
         .catch((error) => {
           console.error("Error saving chat post:", error);
+          // show an error
         });
+
+      // Note: You can also update messages state with the new message immediately
+      // setMessages([...messages, message]);
     }
   };
 
-  function loadPreviousMessages() {
-    // get the messages from Firebase
-  }
+  const loadPreviousMessages = async () => {
+    try {
+      const chatRef = collection(db, `chats/groups/${categoryId}`);
+      const querySnapshot = await getDocs(chatRef);
+
+      const loadedMessages = [];
+      querySnapshot.forEach((doc) => {
+        let message = doc.data();
+        
+        // fix createdAt date
+        if(message.cratedAt) {
+          const date = new Date(message.cratedAt * 1000);
+          message.createdAt = date;
+        }
+
+        loadedMessages.push(message);
+      });
+
+      // Update the state with the fetched messages
+      setMessages(loadedMessages.sort((a, b) => {
+        if(!a.createdAt) return -1;
+        if(!b.createdAt) return 1;
+        return a.createdAt - b.createdAt;
+      }));
+    } catch (error) {
+      console.error("Error loading previous messages:", error);
+    }
+  };
 
   useEffect(() => {
     loadPreviousMessages();
-  }, []);
-
-  useEffect(() => {
-    console.log("Location:", location);
-    console.log("Username:", username);
-  }, [location, username]);
+  }, [categoryId]); // Include categoryId as a dependency
 
   return (
     <div>
-      <h2>{category ? `${category.title} Chat` : "Chat Detail " + categoryId}</h2>
+      <h2>
+        {category ? `${category.title} Chat` : "Chat Detail " + categoryId}
+      </h2>
 
       <div
         style={{ height: "300px", border: "1px solid #ccc", overflowY: "auto" }}

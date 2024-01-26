@@ -3,9 +3,12 @@ import './blogfeed.css';
 
 import { getDocs, collection } from 'firebase/firestore';
 import  db from '../firebase';
+import { useContext } from 'react';
+import DataContext from '../state/dataContext';
 
 function BlogFeed() {
   const [blogs, setBlogs] = useState([]);
+  const { userBlogs } = useContext(DataContext);
 
   async function loadBlogsFromDB() {
     try {
@@ -39,6 +42,11 @@ function BlogFeed() {
         <div key={blog.id}>
           <h2>{blog.title}</h2>
           <p>{blog.content}</p>
+          {blog.url && (
+            <p>
+              URL: <a href={blog.url} target="_blank" rel="noopener noreferrer">{blog.url}</a>
+            </p>
+          )}
           {/* Add more elements to display other blog information */}
         </div>
       ))}
