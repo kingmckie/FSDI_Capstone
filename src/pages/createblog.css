@@ -39,3 +39,11 @@
   .btn-primary:hover {
     background-color: #4fa3d1;
   }
+
+  .create-container {
+    padding: 20px;
+    margin: 20px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+  }
+  

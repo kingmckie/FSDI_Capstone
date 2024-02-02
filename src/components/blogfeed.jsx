@@ -39,7 +39,7 @@ function BlogFeed() {
       <h1>All my Blog Posts. Please enjoy the creative and curious nature of mankind</h1>
 
       {blogs.map((blog) => (
-        <div key={blog.id}>
+        <div className='blog-card' key={blog.id}>
           <h2>{blog.title}</h2>
           <p>{blog.content}</p>
           {blog.url && (

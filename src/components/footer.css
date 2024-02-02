@@ -1,6 +1,7 @@
+
 .Footer {
-    background-color: #f8f9fa;
-    color: #495057;
+    background-color: black;
+    color: teal;
     padding: 20px;
     margin-top: auto; /* Push the footer to the bottom of the container */
   }
@@ -10,7 +11,7 @@
     flex-direction: column;
     align-items: center;
   }
-  
+  /*****\ 
   .social-icons {
     margin-top: 10px;
   }
@@ -24,3 +25,4 @@
   .social-icons i {
     font-size: 24px;
   }
+  /*****/

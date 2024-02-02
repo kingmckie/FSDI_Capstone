@@ -75,7 +75,7 @@ function Group() {
 
   return (
     <div className="group-container">
-      <h1>Group Page</h1>
+      <h1 className="group-title">Group Page</h1>
 
       <div className="events-container">
         {events.map((event) => (
@@ -100,6 +100,10 @@ function Group() {
 }
 
 export default Group;
+
+
+
+
 
 
 

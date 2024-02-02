@@ -76,21 +76,31 @@ function GeoSpatial() {
 
   return (
     <div className="geospatial">
-      <h1>Google Maps</h1>
-      <div>
-        <label>Name:</label>
-        <input type="text" name="name" onChange={handleInputChange} />
-        <label>Latitude:</label>
-        <input type="number" name="lat" onChange={handleInputChange} />
-        <label>Longitude:</label>
-        <input type="number" name="lon" onChange={handleInputChange} />
-        <label>Media Type (image/video):</label>
-        <select name="mediaType" onChange={handleInputChange}>
-          <option value="image">Image</option>
-          <option value="video">Video</option>
-        </select>
-        <label>Media URL:</label>
-        <input type="text" name="mediaUrl" onChange={handleInputChange} />
+      <h1 className="title-page"> Google Maps</h1>
+      <div className="form-container">
+        <div className="form-group">
+          <label>Name:</label>
+          <input type="text" name="name" onChange={handleInputChange} />
+        </div>
+        <div className="form-group">
+          <label>Latitude:</label>
+          <input type="number" name="lat" onChange={handleInputChange} />
+        </div>
+        <div className="form-group">
+          <label>Longitude:</label>
+          <input type="number" name="lon" onChange={handleInputChange} />
+        </div>
+        <div className="form-group">
+          <label>Media Type (image/video):</label>
+          <select name="mediaType" onChange={handleInputChange}>
+            <option value="image">Image</option>
+            <option value="video">Video</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <label>Media URL:</label>
+          <input type="text" name="mediaUrl" onChange={handleInputChange} />
+        </div>
         <button onClick={handleAddLocation}>Add Location</button>
       </div>
       {isLoaded ? (

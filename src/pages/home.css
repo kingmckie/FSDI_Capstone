@@ -1,39 +1,48 @@
-/* home.css */
-
 .home {
-    text-align: center;
-  }
-  
-  .home h1 {
-    text-align: center;
-    color: turquoise;
-  }
-  
-  .home .header img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-  }
-  
+  text-align: center;
+}
+
+.home h1 {
+  text-align: center;
+  color: teal;
+}
+
+
+.home .content h3,
+.home .content p {
+  color: white; 
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.home .header img {
+  max-width: 100%;
+  height: 30vh; /* Adjusted height to reduce the size */
+  display: block;
+  margin: 0 auto;
+}
+
+.home .content {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  text-align: left;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.home .content .text-container {
+  text-align: center; /* Adjust text alignment as needed */
+}
+
+.home .content .image-container {
+  margin-bottom: 50px; /* Adjust the spacing between image and text */
+}
+
+@media (max-width: 767px) {
   .home .content {
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    text-align: left;
-    align-items: center;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  
-  .home .content .image-container {
-    margin-bottom: 20px; /* Adjust the spacing between image and text */
-  }
-  
-  @media (max-width: 767px) {
-    .home .content {
       padding: 20px;
       display: block;
-    }
   }
-
+}
   

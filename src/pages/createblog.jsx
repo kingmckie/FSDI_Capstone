@@ -136,7 +136,7 @@ function CreateBlog() {
       </div>
 
       {/* Display the created blogs using BlogFeed component */}
-      <BlogFeed blogs={userBlogs} />
+      <BlogFeed />
     </div>
   );
 }

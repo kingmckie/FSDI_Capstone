@@ -1,9 +1,13 @@
+import TermsAndConditions from "./TermsAndConditions";
 import "./footer.css";
 
 function Footer () {
     return (
         <div className="Footer">
-            <h4>2024 Wabbit & Hares</h4>
+            <TermsAndConditions>
+                
+            </TermsAndConditions>
+            <h4>2024 Hares & Wabbits</h4>
         </div>
 
     )

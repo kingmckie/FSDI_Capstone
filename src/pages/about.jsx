@@ -4,7 +4,7 @@ import './about.css';
 function About() {
   return (
     <div className="about">
-      <h1>About Us</h1>
+      <h1 className="about-title">About Us</h1>
 
       {/* Creator Section */}
       <div className="section">

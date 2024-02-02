@@ -1,14 +1,29 @@
 .navbar {
     background-color: rgb(78, 143, 160);
+    
   }
   
-  .navbar .user-info {
+  .user-info {
     display: flex;
     flex-direction: column;
-    color: white;
+    color: gray;
     margin-right: 10px;
-    border: 1px solid #fcfcfc;
+    border: 1px solid white;
     border-radius: 4px;
     padding: 2px 5px 0 5px;
   }
+
+  .user-info i {
+    color:white;
+  }
+
+  .user-info label {
+    color:white;
+  }
+
+  .nav-item.active .nav-link {
+    font-weight: bold;
+    color: white;
+  }
+  
   

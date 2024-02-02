@@ -43,5 +43,12 @@
 }
 
 .page {
-  max-height: calc(100vh);
+  min-height: calc(100vh - 207px);
+}
+
+.title-page {
+  color: white;
+  text-align: center;
+  margin-top: 7px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serifS;
 }
